@@ -15,3 +15,14 @@ export const getPosts = async () => {
     orderBy: { createdAt: "desc" },
   });
 };
+
+export const getPost = async (id: string) => {
+  return await prisma.post.findFirst({
+    where: { id },
+    include: {
+      author: {
+        select: { name: true },
+      },
+    },
+  });
+};
