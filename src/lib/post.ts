@@ -1,3 +1,4 @@
+import { NamedCreateRuleMeta } from "./../../node_modules/@typescript-eslint/utils/dist/eslint-utils/RuleCreator.d";
 import { prisma } from "./prisma";
 
 export const getPosts = async () => {
@@ -23,6 +24,33 @@ export const getPost = async (id: string) => {
       author: {
         select: { name: true },
       },
+    },
+  });
+};
+
+export const searchPosts = async (search: string) => {
+  const searchWords = decodeURIComponent(search)
+    .replace(/[\s　]+/g, " ")
+    .trim()
+    .split(" ");
+  const filters = searchWords.map((word) => {
+    return {
+      OR: [{ title: { contains: word } }, { content: { contains: word } }],
+    };
+  });
+  return await prisma.post.findMany({
+    where: {
+      AND: filters,
+    },
+    include: {
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
 };

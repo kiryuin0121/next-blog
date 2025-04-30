@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import SearchBox from "../post/SearchBox";
 
 const PublicHeader = () => {
   return (
@@ -32,11 +32,7 @@ const PublicHeader = () => {
           </NavigationMenu>
 
           <div className="flex items-center gap-4">
-            <Input
-              className="w-[200px] lg:[300px] h-8 text-sm placeholder-[#565656] border-[#565656]/75 focus:outline-none focus:border-0 focus:ring-2 focus:[#19d1ff]"
-              placeholder="記事を検索..."
-            />
-
+            <SearchBox />
             <Button
               asChild
               variant={"outline"}
