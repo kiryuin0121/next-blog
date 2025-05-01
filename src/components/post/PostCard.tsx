@@ -1,4 +1,4 @@
-import { Post } from "@/app/types/post";
+import { Post } from "@/types/post";
 import React from "react";
 import {
   Card,
