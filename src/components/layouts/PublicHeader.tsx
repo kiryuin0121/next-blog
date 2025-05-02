@@ -3,10 +3,8 @@ import React from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -20,12 +18,8 @@ const PublicHeader = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
-                  <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} text-2xl font-bold`}
-                  >
-                    NEXT BLOG
-                  </NavigationMenuLink>
+                <Link href="/" className="text-3xl font-bold">
+                  NEXT BLOG
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -39,7 +33,7 @@ const PublicHeader = () => {
               size={"sm"}
               className="p-2 border-black/75 bg-black hover:bg-[#19d1ff] text-white w-[70px]"
             >
-              <Link href={"/regster"}>新規登録</Link>
+              <Link href={"/register"}>新規登録</Link>
             </Button>
             <Button
               asChild
