@@ -1,4 +1,3 @@
-import { NamedCreateRuleMeta } from "./../../node_modules/@typescript-eslint/utils/dist/eslint-utils/RuleCreator.d";
 import { prisma } from "./prisma";
 
 export const getPosts = async () => {

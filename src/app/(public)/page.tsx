@@ -3,10 +3,10 @@ import PostCard from "@/components/post/PostCard";
 import { Post } from "../../types/post";
 
 type SearchParams = {
-  searchParams: { query?: string };
+  searchParams: Promise<{ query?: string }>;
 };
 export default async function PublicPage({ searchParams }: SearchParams) {
-  const search = searchParams.query;
+  const search = (await searchParams).query;
   const posts = search
     ? ((await searchPosts(search)) as Post[])
     : ((await getPosts()) as Post[]);
