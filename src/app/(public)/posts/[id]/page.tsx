@@ -6,6 +6,10 @@ import Image from "next/image";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github.css";
 type Params = {
   params: Promise<{ id: string }>;
 };
@@ -46,7 +50,14 @@ const PostPage = async ({ params }: Params) => {
             <CardTitle className="text-xl">{post.title}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>{post.content}</p>
+            <ReactMarkdown
+              rehypePlugins={[rehypeHighlight]}
+              remarkPlugins={[remarkGfm]}
+              skipHtml={false}
+              unwrapDisallowed={true}
+            >
+              {post.content}
+            </ReactMarkdown>
           </CardContent>
         </Card>
       </div>

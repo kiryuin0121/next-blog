@@ -21,7 +21,7 @@ const DashboardPage = async () => {
           variant={"outline"}
           className="px-3 py-2 border-black/75 bg-black hover:bg-[#19d1ff] text-white"
         >
-          <Link href={"/posts/create"}>新規記事作成</Link>
+          <Link href={"/manage/posts/create"}>新規記事作成</Link>
         </Button>
       </div>
       <table className="w-full table-auto  border-separate border-spacing-0">

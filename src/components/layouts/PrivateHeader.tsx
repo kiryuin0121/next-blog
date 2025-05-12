@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { auth, signOut } from "@/auth";
 import { redirect } from "next/navigation";
 

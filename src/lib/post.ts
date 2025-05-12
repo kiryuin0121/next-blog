@@ -1,4 +1,6 @@
+import { auth } from "@/auth";
 import { prisma } from "./prisma";
+import { postSchema } from "@/validations/post";
 
 export const getPosts = async () => {
   return await prisma.post.findMany({

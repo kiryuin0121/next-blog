@@ -11,16 +11,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { formatDistanceToNow } from "date-fns";
 import { ja } from "date-fns/locale";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github.css";
+import { normalizeImagePath } from "@/lib/topImage";
 
 const PostCard = ({ post }: { post: Post }) => {
+  const topImageUrl = post.topImage ? normalizeImagePath(post.topImage) : null;
   return (
     <>
       <Link href={`/posts/${post.id}`}>
         <Card className="pt-0 roundex-md hover:shadow-xl overflow-hidden">
-          {post.topImage ? (
+          {topImageUrl ? (
             <div className="relative w-full h-48">
               <Image
-                src={post.topImage}
+                src={topImageUrl}
                 alt={post.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -33,8 +39,15 @@ const PostCard = ({ post }: { post: Post }) => {
           <CardHeader>
             <CardTitle className="line-clamp-1">{post.title}</CardTitle>
           </CardHeader>
-          <CardContent>
-            <p className="line-clamp-2 text-sm text-black/90">{post.content}</p>
+          <CardContent className="line-clamp-2 text-sm text-black/90">
+            <ReactMarkdown
+              rehypePlugins={[rehypeHighlight]}
+              remarkPlugins={[remarkGfm]}
+              skipHtml={false}
+              unwrapDisallowed={true}
+            >
+              {post.content}
+            </ReactMarkdown>
           </CardContent>
           <CardFooter className="flex justify-between text-[#565656]">
             <p>{post.author.name}</p>
