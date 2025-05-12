@@ -116,6 +116,11 @@ const CreatePage = () => {
             >
               記事を作成
             </Button>
+            {state.errors.serverError && (
+              <p className="text-xs text-red-500">
+                {state.errors.serverError.join(",")}
+              </p>
+            )}
           </div>
         </div>
         {isPreview && (

@@ -3,6 +3,7 @@ import { postSchema } from "@/validations/post";
 import { saveImage } from "../utils/image";
 import { auth } from "@/auth";
 import { prisma } from "../prisma";
+import { redirect } from "next/navigation";
 
 type State = {
   success: boolean;
@@ -27,7 +28,7 @@ export const createPost = async (
       errors: { topImage: ["画像のアップロードに失敗しました"] },
     };
   }
-  const validationResult = postSchema.safeParse({ title, content });
+  const validationResult = postSchema.safeParse({ title, content, topImage });
   if (!validationResult.success) {
     const { fieldErrors } = validationResult.error.flatten();
     return {
@@ -35,6 +36,7 @@ export const createPost = async (
       errors: {
         title: fieldErrors.title,
         content: fieldErrors.content,
+        topImage: fieldErrors.topImage,
       },
     };
   }
@@ -53,11 +55,9 @@ export const createPost = async (
       title,
       content,
       topImage,
+      published: true,
       authorId: userId,
     },
   });
-  return {
-    success: true,
-    errors: {},
-  };
+  redirect("/dashboard");
 };
