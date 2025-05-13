@@ -15,10 +15,10 @@ const OperationMenu = ({ postId }: { postId: string }) => {
       <DropdownMenuTrigger className="text-md">・・・</DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem className="p-2 cursor-pointer hover:font-bold">
-          <Link href={`/posts/${postId}`}>詳細</Link>
+          <Link href={`/manage/posts/${postId}`}>詳細</Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="p-2 cursor-pointer hover:font-bold">
-          <Link href={`/posts/${postId}/edit`}>編集</Link>
+          <Link href={`/manage/posts/edit/${postId}`}>編集</Link>
         </DropdownMenuItem>
         <DropdownMenuItem className="p-2 text-red-600 cursor-pointer hover:font-bold">
           削除

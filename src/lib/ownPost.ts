@@ -16,3 +16,18 @@ export const getOwnPosts = async (userId: string) => {
     },
   });
 };
+export const getOwnPost = async (postId: string, userId: string) => {
+  return await prisma.post.findFirst({
+    where: {
+      id: postId,
+      authorId: userId,
+    },
+    include: {
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+};

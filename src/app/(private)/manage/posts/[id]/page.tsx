@@ -1,11 +1,11 @@
-import React from "react";
-import { getPost } from "@/lib/post";
-import { notFound } from "next/navigation";
+import { auth } from "@/auth";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
+import { getOwnPost } from "@/lib/ownPost";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
-
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
@@ -13,12 +13,14 @@ import "highlight.js/styles/github.css";
 type Params = {
   params: Promise<{ id: string }>;
 };
-const PostPage = async ({ params }: Params) => {
-  const { id } = await params;
-  const post = await getPost(id);
-  if (!post) {
-    notFound();
-  }
+const ShowPage = async ({ params }: Params) => {
+  const { id: postId } = await params;
+  const session = await auth();
+  const userId = session?.user?.id;
+  if (!userId) throw new Error("不正なリクエストです");
+  const post = await getOwnPost(postId, userId);
+  if (!post) notFound();
+
   return (
     <>
       <div className="container mx-auto px-4 py-8 max-w-3xl">
@@ -67,4 +69,4 @@ const PostPage = async ({ params }: Params) => {
   );
 };
 
-export default PostPage;
+export default ShowPage;
