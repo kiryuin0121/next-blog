@@ -15,7 +15,7 @@ const DashboardPage = async () => {
   return (
     <div className="container mx-auto px-12 py-12">
       <div className="flex justify-between mb-3 pl-2">
-        <p className="text-2xl font-semibold">記事一覧</p>
+        <p className="text-2xl font-semibold">投稿記事一覧</p>
         <Button
           asChild
           variant={"outline"}
@@ -30,9 +30,7 @@ const DashboardPage = async () => {
             <th className="border-[#565656] border-[1px]  p-2 rounded-tl-md">
               タイトル
             </th>
-            <th className="border-[#565656] border-[1px]  p-2">
-              表示 / 非表示
-            </th>
+            <th className="border-[#565656] border-[1px]  p-2">公開設定</th>
             <th className="border-[#565656] border-[1px] p-2">更新日時</th>
             <th className="border-[#565656] border-[1px]  p-2 rounded-tr-md">
               操作
@@ -48,7 +46,7 @@ const DashboardPage = async () => {
                   {post.title}
                 </td>
                 <td className="border p-2">
-                  {post.published ? "表示" : "非表示"}
+                  {post.published ? "公開" : "非公開"}
                 </td>
                 <td className="border p-2">
                   {format(post.updatedAt, "yyyy-MM-dd")}

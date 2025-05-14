@@ -8,4 +8,5 @@ export type Post = {
     name: string;
   };
   createdAt: Date;
+  updatedAt?: Date;
 };
