@@ -12,6 +12,7 @@ export const saveImage = async (file: File): Promise<string | null> => {
     await writeFile(filePath, buffer);
     return `/images/${fileName}`;
   } catch (error) {
+    console.error("画像保存Error", error);
     return null;
   }
 };
